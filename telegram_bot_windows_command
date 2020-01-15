@@ -1,0 +1,67 @@
+#!/usr/bim/python
+#Telegram Bot Windows Command
+#Create By @blizzard8080
+
+
+import  telepot
+import time
+import os
+
+
+authorized=[700624106]
+
+
+def handle(msg):
+    chat_id = msg['chat']['id']
+    text = msg['text']
+    sender = msg['from']['id']
+    f = open('bot.log', 'a')
+    f.write("Chat-id - " + str(chat_id) + " Text - " + str(text) + " Sender - " + str(sender) + "\n")
+    f.close()
+
+
+    if sender in authorized:
+		args=text.split()
+		command = args[0]
+
+    if command == '/meme':
+            bot.sendPhoto(chat_id, "https://cdn-brilio-net.akamaized.net/news/2019/11/28/174811/1134299-meme-disuruh-emak-belanja.jpg")
+
+    if command == '/jam':
+            bot.sendMessage(chat_id, time.strftime("%d/%m/%Y\nJam %H:%M:%S"))
+
+    if command == '/ping':
+            host = str(args[1])
+            output=os.popen("ping "+host).read()
+            bot.sendMessage(chat_id, output)
+
+    if command == '/pathping':
+            host = str(args[1])
+            output=os.popen("pathping "+host).read()
+            bot.sendMessage(chat_id, output)
+
+    if command == '/tracert':
+            host = str(args[1])
+            output=os.popen("tracert "+host).read()
+            bot.sendMessage(chat_id, output)
+
+
+    if command == '/curl':
+            host = str(args[1])
+            output=os.popen("curl "+host).read()
+            bot.sendMessage(chat_id, output)
+
+
+    if command == '/arp':
+        host = str(args[1])
+        output=os.popen("arp "+host).read()
+        bot.sendMessage(chat_id, output)
+
+
+
+bot = telepot.Bot('826522781:AAFbnIgWLw6D8a8KgKjt9Li9A0Odsa9hBsc')
+bot.message_loop(handle)
+print ('BOT SIAP BOS!!')
+
+while 1:
+	time.sleep(10)
